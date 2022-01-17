@@ -1,7 +1,7 @@
 const Restaurant = require('./models/restaurant.js');       //restaurant model
 const Review = require('./models/review.js');       //restaurant model
 const User = require('./models/user.js');       //restaurant model
-const { reviewSchema } = require('./JoiSchemas.js');      //JOI schemas
+const { reviewSchema } = require('./joiSchemas.js');      //JOI schemas
 const ExpressError = require('./utils/ExpressError.js');    //ExpressError
 
 const ObjectId = require('mongodb').ObjectId;
