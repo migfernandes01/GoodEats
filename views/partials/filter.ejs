@@ -1,0 +1,74 @@
+<div class="mb-3">
+    <label class="form-label" for="name">Name: </label>
+    <input type="text" class="form-control" name="name" placeholder="Restaurant name">
+</div>
+<div class="mb-3">
+    <label class="form-label" for="price">Price: </label>
+    <select id="price" class="form-select" aria-label="Default select example" name="price">
+        <option selected disabled>Select Price Range</option>
+        <option value="Low Price($10 or less)">Low Price($10 or less)</option>
+        <option value="Medium Price($10-$25)">Medium Price($10-$25)</option>
+        <option value="High Price($25-$45)">High Price($25-$45)</option>
+        <option value="Exquisite Price($45 or more)">Exquisite Price($45 or more)</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label class="form-label" for="cousine">Cuisine: </label>
+    <div id="cousine">
+        <p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="american" id="american">
+                <label class="form-check-label" for="american">American</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="japanese" id="japanese">
+                <label class="form-check-label" for="japanese">Japanese</label>
+            </div>
+        </p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="type" value="chinese" id="chinese">
+            <label class="form-check-label" for="chinese">Chinese&nbsp&nbsp</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="type" value="greek" id="greek">
+            <label class="form-check-label" for="greek">Greek</label>
+        </div>
+        <p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="latin" id="latin">
+                <label class="form-check-label" for="latin">Latin&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="italian" id="italian">
+                <label class="form-check-label" for="italian">Italian</label>
+            </div>
+        </p>
+        <p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="healthy" id="healthy">
+                <label class="form-check-label" for="healthy">Healthy&nbsp&nbsp&nbsp</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" value="indian" id="indian">
+                <label class="form-check-label" for="indian">Indian&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+            </div>
+        </p>   
+    </div>
+    <input name="type" type="hidden" value="" id="checkedBoxes">
+</div>
+<div class="mb-3">
+    <label class="form-label" for="vegan">Vegan Friendly: </label>
+    <div id="vegan" required>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="vegan" id="vegan" value="true">
+            <label class="form-check-label" for="vegan">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="vegan" id="not-vegan" value="false">
+            <label class="form-check-label" for="not-vegan">No</label>
+        </div>
+    </div>
+</div>
+<div class="mb-3">
+    <button class="btn btn-primary">Filter</button>
+</div>

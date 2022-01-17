@@ -1,0 +1,140 @@
+<% layout('layouts/boilerplate.ejs') %>
+    <div class="row">
+        <h1 class="text-center">New Restaurant</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/restaurants" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name: </label>
+                    <input class="form-control" type="text" id="name" name="restaurant[name]" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location: </label>
+                    <input class="form-control" type="text" id="location" name="restaurant[location]" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price: </label>
+                    <select id="price" class="form-select" aria-label="Default select example" name="restaurant[price]">
+                        <option selected disabled>Select Price Range</option>
+                        <option value="Low Price($10 or less)">Low Price($10 or less)</option>
+                        <option value="Medium Price($10-$25)">Medium Price($10-$25)</option>
+                        <option value="High Price($25-$45)">High Price($25-$45)</option>
+                        <option value="Exquisite Price($45 or more)">Exquisite Price($45 or more)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="image"> Upload images: </label>
+                    <input class="form-control" type="file" id="image" name="restaurant[images]" multiple>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="cousine">Cuisine: </label>
+                    <div id="cousine">
+                        <p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="american" id="american">
+                                <label class="form-check-label" for="american">American</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="japanese" id="japanese">
+                                <label class="form-check-label" for="japanese">Japanese</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="chinese" id="chinese">
+                                <label class="form-check-label" for="chinese">Chinese</label>
+                            </div>
+                        </p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="greek" id="greek">
+                            <label class="form-check-label" for="greek">Greek&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="latin" id="latin">
+                            <label class="form-check-label" for="latin">Latin&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="italian" id="italian">
+                            <label class="form-check-label" for="italian">Italian</label>
+                        </div>
+                        <p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="healthy" id="healthy">
+                                <label class="form-check-label" for="healthy">Healthy&nbsp&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="indian" id="indian">
+                                <label class="form-check-label" for="indian">Indian&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                            </div>
+                        </p>
+                    </div>
+                    <input name="restaurant[type]" type="hidden" value="" id="checkedBoxes">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="vegan">Vegan Friendly: </label>
+                    <div id="vegan" required>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="restaurant[vegan]" id="vegan" value="true">
+                            <label class="form-check-label" for="vegan">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="restaurant[vegan]" id="not-vegan" value="false">
+                            <label class="form-check-label" for="not-vegan">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description: </label>
+                    <textarea class="form-control" type="text" id="description" name="restaurant[description]" required> </textarea>
+                </div>
+                <div class="mb-3">
+                    <button id="btn" class="btn btn-success">Add Restaurant</button>
+                </div>
+            </form>
+            <a href="/restaurants">Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', checkbox);
+
+        function checkbox() {
+            console.log("CLICKED!");
+            //get checkboxes
+            const american = document.getElementById("american");
+            const japanese = document.getElementById("japanese");
+            const chinese = document.getElementById("chinese");
+            const greek = document.getElementById("greek");
+            const latin = document.getElementById("latin");
+            const italian = document.getElementById("italian");
+            const healthy = document.getElementById("healthy");
+            const indian = document.getElementById("indian");
+            const checkedValues = document.getElementById("checkedBoxes");
+            //fill checkedValues with value of checked checkboxes
+            if(american.checked){
+                checkedValues.value += "American";
+            }
+            if(japanese.checked){
+                checkedValues.value += " Japanese";
+            }
+            if(chinese.checked){
+                checkedValues.value += " Chinese";
+            }
+            if(greek.checked){
+                checkedValues.value += " Greek";
+            }
+            if(latin.checked){
+                checkedValues.value += " Latin";
+            }
+            if(italian.checked){
+                checkedValues.value += " Italian";
+            }
+            if(healthy.checked){
+                checkedValues.value += " Healthy";
+            }
+            if(indian.checked){
+                checkedValues.value += " Indian";
+            }
+            console.log(checkedValues.value);       
+        }
+    </script>
+
+    <script src="/scripts/validateForms.js"></script>

@@ -1,0 +1,48 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">GoodEats</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/restaurants">Restaurants</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropDown">
+              <li><a class="dropdown-item" href="/categories/american">🍕American</a></li>
+              <li><a class="dropdown-item" href="/categories/japanese">🍣Japanese</a></li>
+              <li><a class="dropdown-item" href="/categories/chinese">🥢Chinese</a></li>
+              <li><a class="dropdown-item" href="/categories/greek">🧆Greek</a></li>
+              <li><a class="dropdown-item" href="/categories/latin">🌮Latin</a></li>
+              <li><a class="dropdown-item" href="/categories/italian">🍝Italian</a></li>
+              <li><a class="dropdown-item" href="/categories/healthy">🥗Healthy</a></li>
+              <li><a class="dropdown-item" href="/categories/indian">🍛Indian</a></li>
+              <li><a class="dropdown-item" href="/categories/vegan">🌱Vegan</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <% if(!currentUser){ %> <!--If current user is undefined-->
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+          <% }else{ %> <!--If current user is defined-->
+            <li class="nav-link">
+              Hello, <%=currentUser.username%>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          <% } %> 
+        </ul>
+      </div>
+    </div>
+  </nav>

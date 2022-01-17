@@ -1,0 +1,151 @@
+<% layout('layouts/boilerplate.ejs') %> 
+    <div class="row">
+        <h1 class="text-center">Edit Restaurant</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/restaurants/<%= restaurant._id %>/?_method=PATCH" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name: </label>
+                    <input class="form-control" type="text" id="name" name="restaurant[name]" value="<%=restaurant.name%>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location: </label>
+                    <input class="form-control" type="text" id="location" name="restaurant[location]" value="<%=restaurant.location%>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price: </label>
+                    <select id="price" class="form-select" aria-label="Default select example" name="restaurant[price]">
+                        <option disabled>Select Price Range</option>
+                        <option value="Low Price($10 or less)" <% if(restaurant.price == "Low Price($10 or less)"){ %> selected <% } %> >Low Price($10 or less)</option>
+                        <option value="Medium Price($10-$25)" <% if(restaurant.price == "Medium Price($10-$25)"){ %> selected <% } %> >Medium Price($10-$25)</option>
+                        <option value="High Price($25-$45)" <% if(restaurant.price == "High Price($25-$45)"){ %> selected <% } %> >High Price($25-$45)</option>
+                        <option value="Exquisite Price($45 or more)" <% if(restaurant.price == "Exquisite Price($45 or more)"){ %> selected <%}%>>Exquisite Price($45 or more)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="image"> Upload images: </label>
+                    <input class="form-control" type="file" id="image" name="restaurant[images]" multiple>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="cousine">Cuisine: </label>
+                    <div id="cousine">
+                        <p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="american" id="american" <%if(restaurant.type.includes("American")){%> checked<%}%>>
+                                <label class="form-check-label" for="american">American</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="japanese" id="japanese" <%if(restaurant.type.includes("Japanese")){%> checked<%}%>>
+                                <label class="form-check-label" for="japanese">Japanese</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="chinese" id="chinese" <%if(restaurant.type.includes("Chinese")){%> checked<%}%>>
+                                <label class="form-check-label" for="chinese">Chinese</label>
+                            </div>
+                        </p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="greek" id="greek" <%if(restaurant.type.includes("Greek")){%> checked<%}%>>
+                            <label class="form-check-label" for="greek">Greek&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="latin" id="latin" <%if(restaurant.type.includes("Latin")){%> checked<%}%>>
+                            <label class="form-check-label" for="latin">Latin&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type" value="italian" id="italian" <%if(restaurant.type.includes("Italian")){%> checked<%}%>>
+                            <label class="form-check-label" for="italian">Italian</label>
+                        </div>
+                        <p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="healthy" id="healthy" <%if(restaurant.type.includes("Healthy")){%> checked<%}%>>
+                                <label class="form-check-label" for="healthy">Healthy&nbsp&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type" value="indian" id="indian" <%if(restaurant.type.includes("Indian")){%> checked<%}%>>
+                                <label class="form-check-label" for="indian">Indian&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                            </div>
+                        </p>
+                    </div>
+                    <input name="restaurant[type]" type="hidden" value="" id="checkedBoxes">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="vegan">Vegan Friendly: </label>
+                    <div id="vegan">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="restaurant[vegan]" id="vegan" value="true" <%if(restaurant.vegan==true){%> checked<%}%>>
+                            <label class="form-check-label" for="vegan">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="restaurant[vegan]" id="not-vegan" value="false" <%if(restaurant.vegan==false){%> checked<%}%>>
+                            <label class="form-check-label" for="not-vegan">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description: </label>
+                    <textarea class="form-control" type="text" id="description" name="restaurant[description]" required>
+                        <%=restaurant.description%>
+                    </textarea>
+                </div>
+                <div class="mb-3">
+                    <% restaurant.images.forEach(function(img, i) { %>
+                        <img src="<%= img.thumbnail %> " class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" name="deleteImages[]" value="<%= img.filename %>" id="image-<%=i%>">
+                        </div>
+                        <label for="image-<%=i%>">Remove?</label>
+                    <% }) %>  
+                </div>
+                <div class="mb-3">
+                    <button id="btn" class="btn btn-success">Edit Restaurant</button>
+                </div>
+            </form>
+            <a href="/restaurants">Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', checkbox);
+
+        function checkbox() {
+            console.log("CLICKED!");
+            //get checkboxes
+            const american = document.getElementById("american");
+            const japanese = document.getElementById("japanese");
+            const chinese = document.getElementById("chinese");
+            const greek = document.getElementById("greek");
+            const latin = document.getElementById("latin");
+            const italian = document.getElementById("italian");
+            const healthy = document.getElementById("healthy");
+            const indian = document.getElementById("indian");
+            const checkedValues = document.getElementById("checkedBoxes");
+            //fill checkedValues with value of checked checkboxes
+            if(american.checked){
+                checkedValues.value += "American";
+            }
+            if(japanese.checked){
+                checkedValues.value += " Japanese";
+            }
+            if(chinese.checked){
+                checkedValues.value += " Chinese";
+            }
+            if(greek.checked){
+                checkedValues.value += " Greek";
+            }
+            if(latin.checked){
+                checkedValues.value += " Latin";
+            }
+            if(italian.checked){
+                checkedValues.value += " Italian";
+            }
+            if(healthy.checked){
+                checkedValues.value += " Healthy";
+            }
+            if(indian.checked){
+                checkedValues.value += " Indian";
+            }
+            console.log(checkedValues.value);       
+        }
+    </script>
+    
+    <script src="/scripts/validateForms.js"></script>
